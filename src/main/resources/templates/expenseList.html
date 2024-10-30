@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expenses</title>
+</head>
+<body>
+    <h1>Expenses for Trip: [[${trip.tripName}]]</h1>
+    <a th:href="@{/trip/{id}/expense/new(id=${trip.id})}">Add New Expense</a>
+    <table>
+        <tr>
+            <th>Member</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="expense : ${expenses}">
+            <td th:text="${expense.memberName}">Member</td>
+            <td th:text="${expense.expenseDescription}">Description</td>
+            <td th:text="${expense.contributeAmount}">Amount</td>
+            <td>
+                <a th:href="@{/trip/{tripId}/expense/edit/{expenseId}(tripId=${trip.id},expenseId=${expense.id})}">Edit</a>
+                <a th:href="@{/trip/{tripId}/expense/delete/{expenseId}(tripId=${trip.id},expenseId=${expense.id})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+    <!-- Display the total amount -->
+    <p>Total Expense: <span th:text="${totalAmount}">0.0</span></p>
+    
+    <!-- Button to add a new expense -->
+    <a th:href="@{/trip/{tripId}/expenses/add(tripId=${trip.id})}">Add New Expense</a>
+    
+    <!-- Back button to go to the main page -->
+    <p><a th:href="@{/trips}">Back to Main Page</a></p>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Form</title>
+</head>
+<body>
+    <h1>Expense Form for Trip: [[${expense.trip.tripName}]]</h1>
+    <form th:action="@{/trip/{tripId}/expense/save(tripId=${expense.trip.id})}" th:object="${expense}" method="post">
+        
+        <label>Member ID: </label>
+        <input type="text" th:field="*{id}" />
+        <label>Member Name: </label>
+        <input type="text" th:field="*{memberName}" />
+        <label>Description: </label>
+        <input type="text" th:field="*{expenseDescription}" />
+        <label>Amount: </label>
+        <input type="number" step="0.01" th:field="*{contributeAmount}" />
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

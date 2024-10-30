@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Details</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 80%; margin: auto; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+        .btn { background-color: #007bff; color: #fff; padding: 10px 20px; border: none; cursor: pointer; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Trip Details</h1>
+
+    <!-- Trip Information -->
+    <h2>Trip: <span th:text="${trip.name}"></span></h2>
+    <p>Location: <span th:text="${trip.location}"></span></p>
+    <p>Date: <span th:text="${trip.date}"></span></p>
+
+    <!-- Button to Add a New Member -->
+    <a th:href="@{'/trip/member/add?tripId=' + ${trip.id}}" class="btn">Add Member</a>
+
+    <!-- Members Table -->
+    <h2>Members</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Total Contribution</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through each member and display their details -->
+            <tr th:each="member : ${members}">
+                <td th:text="${member.name}">Member Name</td>
+                <td th:text="${member.description}">Expense Description</td>
+                <td th:text="${member.totalContribution}">Total Contribution</td>
+                <!-- Display balance from balanceMap -->
+                <td th:text="${balanceMap[member]}">Balance</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
