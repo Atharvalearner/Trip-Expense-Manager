@@ -17,7 +17,7 @@ public class TripService {
     private TripRepo tripRepository;
 
     @Autowired
-    private MemberRepo memberRepository; // Autowire MemberRepo here
+    private MemberRepo memberRepository; 
 
     // Save a trip
     public Trip saveTrip(Trip trip) {
@@ -26,7 +26,7 @@ public class TripService {
 
     // Save a member
     public Member saveMember(Member member) {
-        return memberRepository.save(member); // Save member to the repository
+        return memberRepository.save(member); 
     }
 
     public Trip getTripById(String id) {
@@ -45,12 +45,12 @@ public class TripService {
         Map<Member, BigDecimal> balanceMap = new HashMap<>();
         for (Member member : members) {
             BigDecimal total = member.getTotalContribution();
-            BigDecimal count = BigDecimal.valueOf(members.size());  // Example divisor
+            BigDecimal count = BigDecimal.valueOf(members.size());  
             BigDecimal balance;
             if (count.compareTo(BigDecimal.ZERO) != 0) {
-                balance = total.divide(count, BigDecimal.ROUND_HALF_UP);  // Safe division
+                balance = total.divide(count, BigDecimal.ROUND_HALF_UP);  
             } else {
-                balance = BigDecimal.ZERO;  // Fallback value or handle as needed
+                balance = BigDecimal.ZERO;  
             }
 
             balanceMap.put(member, balance);

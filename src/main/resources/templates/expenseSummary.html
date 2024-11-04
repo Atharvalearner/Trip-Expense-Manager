@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expense Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Expense Summary for Trip: [[${trip.tripName}]]</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Member</th>
+                <th>Owes To</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="entry : ${expenseSummary}">
+                <tr th:each="oweEntry : ${entry.value}">
+                    <td th:text="${entry.key}"></td> <!-- Member -->
+                    <td th:text="${oweEntry.key}">Name</td> <!-- Owes To -->
+                    <td th:text="${oweEntry.value}">Amount</td> <!-- Amount -->
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+    <a th:href="@{/trip/{tripId}/expenses(tripId=${trip.id})}">Back to Expenses</a>
+</body>
+</html>

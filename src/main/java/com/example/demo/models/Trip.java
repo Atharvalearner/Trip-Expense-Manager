@@ -7,19 +7,17 @@ import jakarta.persistence.*;
 @Entity
 public class Trip {
     @Id
-    private String id; // Primary key
+    private String id; 
     private String tripName;
     private String tripDescription;
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Expense> expenses = new ArrayList<>();
 
-    // Default constructor
     public Trip() {
         super();
     }
 
-    // Constructor with parameters
     public Trip(String id, String tripName, String tripDescription, List<Expense> expenses) {
         super();
         this.id = id;
@@ -28,7 +26,6 @@ public class Trip {
         this.expenses = expenses;
     }
 
-    // Getters and Setters
     public String getId() {
         return id;
     }
@@ -37,19 +34,19 @@ public class Trip {
         this.id = id;
     }
 
-    public String getTripName() { // Corrected getter
+    public String getTripName() { 
         return tripName;
     }
 
-    public void setTripName(String tripName) { // Corrected setter
+    public void setTripName(String tripName) { 
         this.tripName = tripName;
     }
 
-    public String getTripDescription() { // Corrected getter
+    public String getTripDescription() { 
         return tripDescription;
     }
 
-    public void setTripDescription(String tripDescription) { // Corrected setter
+    public void setTripDescription(String tripDescription) { 
         this.tripDescription = tripDescription;
     }
 
@@ -61,7 +58,6 @@ public class Trip {
         this.expenses = expenses;
     }
 
-    // Helper methods to manage the bidirectional relationship
     public void addExpense(Expense expense) {
         expenses.add(expense);
         expense.setTrip(this);

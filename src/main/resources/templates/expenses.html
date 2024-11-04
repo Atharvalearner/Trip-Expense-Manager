@@ -2,11 +2,85 @@
 <html>
 <head>
     <title>Expenses for Trip</title>
+    <style>
+        /* Style for the page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Styling for action links */
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        /* Total expense styling */
+        p {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Button styling */
+        a.button {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 10px;
+            font-weight: bold;
+        }
+
+        a.button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <h1>Expenses for Trip: <span th:text="${trip.tripName}"></span></h1>
-    
-    <!-- Table for displaying expenses -->
+
     <table>
         <thead>
             <tr>
@@ -28,14 +102,14 @@
             </tr>
         </tbody>
     </table>
-    
+
     <!-- Display the total amount -->
     <p>Total Expense: <span th:text="${totalAmount}">0.0</span></p>
-    
+
     <!-- Button to add a new expense -->
-    <a th:href="@{/trip/{tripId}/expenses/add(tripId=${trip.id})}">Add New Expense</a>
-    
+    <a th:href="@{/trip/{tripId}/expenses/add(tripId=${trip.id})}" class="button">Add New Expense</a>
+
     <!-- Back button to go to the main page -->
-    <p><a th:href="@{/}">Back to Main Page</a></p>
+    <p><a th:href="@{/}" class="button">Back to Main Page</a></p>
 </body>
 </html>

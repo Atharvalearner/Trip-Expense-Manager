@@ -2,25 +2,21 @@
 <html>
 <head>
     <title>Trips</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <h1>Trips</h1>
     <a href="/trip/new">Add New Trip</a>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-        <tr th:each="trip : ${trips}">
-            <td th:text="${trip.tripName}">Trip Name</td>
-            <td th:text="${trip.tripDescription}">Description</td>
-            <td>
+    <div class="card-container">
+        <div class="card" th:each="trip : ${trips}">
+            <h2 th:text="${trip.tripName}">Trip Name</h2>
+            <p th:text="${trip.tripDescription}">Description</p>
+            <div class="actions">
                 <a th:href="@{/trip/edit/{id}(id=${trip.id})}">Edit</a>
                 <a th:href="@{/trip/delete/{id}(id=${trip.id})}">Delete</a>
                 <a th:href="@{/trip/{id}/expenses(id=${trip.id})}">View Expenses</a>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

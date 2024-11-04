@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-//import java.math.*;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.models.Expense;
 import com.example.demo.models.Trip;
+import com.example.demo.services.CalculationService;
 import com.example.demo.services.ExpenseService;
 import com.example.demo.services.TripService;
 
@@ -18,6 +18,9 @@ public class TripController {
     @Autowired
     private TripService tripService;
 
+    @Autowired
+    private CalculationService calculationService;
+    
     @Autowired
     private ExpenseService expenseService;
 
@@ -92,4 +95,15 @@ public class TripController {
         expenseService.deleteExpense(expenseId);
         return "redirect:/trip/" + tripId + "/expenses";
     }
+
+    @GetMapping("/trip/{tripId}/expense-summary")
+    public String showExpenseSummary(@PathVariable String tripId, Model model) {
+        Trip trip = tripService.getTripById(tripId);
+        Map<String, Map<String, Double>> expenseSummary = calculationService.calculateExpenseShare(trip);
+
+        model.addAttribute("trip", trip);
+        model.addAttribute("expenseSummary", expenseSummary);
+        return "expenseSummary"; // This view will display the summary.
+    }
+    
 }
