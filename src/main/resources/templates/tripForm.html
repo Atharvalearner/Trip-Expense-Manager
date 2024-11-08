@@ -7,12 +7,27 @@
 <body>
     <h1>Trip Form</h1>
     <form th:action="@{/trip/save}" th:object="${trip}" method="post">
-        <label>Trip ID: </label>
-        <input type="text" th:field="*{id}" />
-        <label>Name: </label>
-        <input type="text" th:field="*{tripName}" />
-        <label>Description: </label>
-        <input type="text" th:field="*{tripDescription}" />
+        <label>Trip ID:</label>
+        <input type="text" th:field="*{id}" placeholder="Enter Trip ID" required />
+
+        <label>Name:</label>
+        <input type="text" th:field="*{tripName}" placeholder="Enter Trip Name" required />
+
+        <label>Description:</label>
+        <input type="text" th:field="*{tripDescription}" placeholder="Enter Trip Description" required />
+
+        <label>Destination:</label>
+        <input type="text" th:field="*{destination}" placeholder="Enter Destination" required />
+
+        <label>Start Date:</label>
+        <input type="date" th:field="*{startDate}" required />
+
+        <label>End Date:</label>
+        <input type="date" th:field="*{endDate}" required />
+
+        <label>Budget:</label>
+        <input type="number" th:field="*{budget}" step="0.01" placeholder="Enter Budget" required />
+
         <button type="submit">Save</button>
     </form>
 </body>

@@ -40,6 +40,19 @@ public class TripService {
         tripRepository.deleteById(id);
     }
 
+//    public Trip updateTrip(String id, Trip trip) {
+//    	Optional<Trip> t = tripRepository.findById(id);
+//    	Trip t1 = t.get();
+//    	t1.setTripName(trip.getTripName());
+//    	t1.setStartDate(trip.getStartDate());
+//    	t1.setEndDate(trip.getEndDate());
+//    	t1.setDestination(trip.getDestination());
+//    	t1.setBudget(trip.getBudget());
+//    	t1.setTripDescription(trip.getTripDescription());
+//    	tripRepository.save(t1);
+//        return t1;
+//    }
+    
     @SuppressWarnings("deprecation")
 	public Map<Member, BigDecimal> calculateDistribution(List<Member> members) {
         Map<Member, BigDecimal> balanceMap = new HashMap<>();

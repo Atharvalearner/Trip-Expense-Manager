@@ -6,11 +6,17 @@
 </head>
 <body>
     <h1>Trips</h1>
+    
     <a href="/trip/new">Add New Trip</a>
+    
     <div class="card-container">
         <div class="card" th:each="trip : ${trips}">
             <h2 th:text="${trip.tripName}">Trip Name</h2>
             <p th:text="${trip.tripDescription}">Description</p>
+            <p><strong>Destination:</strong> <span th:text="${trip.destination}">Destination</span></p>
+            <p><strong>Start Date:</strong> <span th:text="${trip.startDate}">Start Date</span></p>
+            <p><strong>End Date:</strong> <span th:text="${trip.endDate}">End Date</span></p>
+            <p><strong>Budget:</strong> <span th:text="${trip.budget}">Budget</span></p>
             <div class="actions">
                 <a th:href="@{/trip/edit/{id}(id=${trip.id})}">Edit</a>
                 <a th:href="@{/trip/delete/{id}(id=${trip.id})}">Delete</a>

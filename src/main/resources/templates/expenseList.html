@@ -3,7 +3,6 @@
 <head>
     <title>Expenses</title>
     <style>
-        /* Style for the page */
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -16,7 +15,6 @@
             margin-bottom: 20px;
         }
 
-        /* Table styling */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -41,7 +39,6 @@
             background-color: #f2f2f2;
         }
 
-        /* Styling for action links */
         a {
             color: #007bff;
             text-decoration: none;
@@ -52,7 +49,6 @@
             color: #0056b3;
         }
 
-        /* Total expense styling */
         p {
             font-size: 18px;
             margin-top: 20px;
@@ -60,7 +56,6 @@
             text-align: center;
         }
 
-        /* Button styling */
         a.button {
             display: inline-block;
             padding: 10px 15px;
@@ -77,7 +72,6 @@
             background-color: #0056b3;
         }
 
-        /* Centering buttons */
         .button-container {
             text-align: center; /* Center align the buttons */
             margin: 20px 0; /* Add some margin for spacing */
@@ -103,7 +97,7 @@
             </td>
         </tr>
     </table>
-    <!-- Display the total amount -->
+    
     <p>Total Expense: <span th:text="${totalAmount}">0.0</span></p>
     
     <!-- Display the relational summary for expense in whole trip-->
@@ -111,12 +105,10 @@
     <p><a th:href="@{/trip/{tripId}/expense-summary(tripId=${trip.id})}">View Expense Summary</a></p>
     </div>
     
-    <!-- Centered button to add a new expense -->
     <div class="button-container">
         <a th:href="@{/trip/{id}/expense/new(id=${trip.id})}" class="button">Add New Expense</a>
     </div>
     
-    <!-- Back button to go to the main page -->
     <div class="button-container">
         <p><a th:href="@{/trips}" class="button">Back to Main Page</a></p>
     </div>

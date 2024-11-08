@@ -10,23 +10,64 @@ public class Trip {
     private String id; 
     private String tripName;
     private String tripDescription;
+    private String destination;
+    private String startDate;
+    private String endDate;
+    private Double budget;
 
-    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Trip(String id, String tripName, String tripDescription, String destination, String startDate,
+			String endDate, Double budget, List<Expense> expenses) {
+		super();
+		this.id = id;
+		this.tripName = tripName;
+		this.tripDescription = tripDescription;
+		this.destination = destination;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.budget = budget;
+		this.expenses = expenses;
+	}
+
+	@OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Expense> expenses = new ArrayList<>();
 
     public Trip() {
         super();
     }
 
-    public Trip(String id, String tripName, String tripDescription, List<Expense> expenses) {
-        super();
-        this.id = id;
-        this.tripName = tripName;
-        this.tripDescription = tripDescription;
-        this.expenses = expenses;
-    }
+    public String getDestination() {
+		return destination;
+	}
 
-    public String getId() {
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public Double getBudget() {
+		return budget;
+	}
+
+	public void setBudget(Double budget) {
+		this.budget = budget;
+	}
+
+	public String getId() {
         return id;
     }
 
