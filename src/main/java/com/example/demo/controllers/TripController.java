@@ -101,4 +101,20 @@ public class TripController {
         return "expenseSummary";
     }
     
+    @GetMapping("/trip/{tripId}/generateUpiLink")
+    @ResponseBody
+    public String generateUpiLink(
+            @RequestParam String upiId,
+            @RequestParam String payeeName,
+            @RequestParam String amount,
+            @RequestParam(defaultValue = "Expense Payment") String transactionNote) {
+
+        // Construct the UPI deep link
+        String upiLink = String.format(
+                "upi://pay?pa=%s&pn=%s&am=%s&cu=INR&tn=%s",
+                upiId, payeeName, amount, transactionNote);
+
+        return upiLink;
+    }
+    
 }

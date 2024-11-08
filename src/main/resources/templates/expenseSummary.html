@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Expense Summary</title>
     <style>
+        /* General styling */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -17,12 +18,15 @@
             margin-bottom: 20px;
         }
 
+        /* Styling the table */
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         th, td {
@@ -40,34 +44,77 @@
             background-color: #f1f1f1;
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
+        /* Form container */
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            max-width: 400px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        li {
-            margin: 5px 0;
+        /* Labels and input fields */
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #333;
         }
 
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 15px;
-            background-color: #007bff;
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        /* Pay Now Button */
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
             color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        /* Button hover effect */
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Back link styling */
+        a {
+            display: block;
+            max-width: 150px;
+            text-align: center;
+            padding: 10px;
+            margin: 20px auto 0;
+            color: white;
+            background-color: #333;
             text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.3s;
         }
 
         a:hover {
-            background-color: #0056b3;
+            background-color: #555;
         }
     </style>
 </head>
 <body>
     <h2>Expense Summary for Trip: [[${trip.tripName}]]</h2>
+
     <table>
         <thead>
             <tr>
@@ -79,13 +126,49 @@
         <tbody>
             <th:block th:each="entry : ${expenseSummary}">
                 <tr th:each="oweEntry : ${entry.value}">
-                    <td th:text="${entry.key}"></td> <!-- Member -->
-                    <td th:text="${oweEntry.key}">Name</td> <!-- Owes To -->
-                    <td th:text="${oweEntry.value}">Amount</td> <!-- Amount -->
+                    <td th:text="${entry.key}"></td> 
+                    <td th:text="${oweEntry.key}">Name</td> 
+                    <td th:text="${oweEntry.value}">Amount</td>
                 </tr>
             </th:block>
         </tbody>
     </table>
+    
+    <!-- Form container for UPI details -->
+    <div class="form-container">
+        <label for="upiId">Enter UPI ID:</label>
+        <input type="text" id="upiId" placeholder="payee@upi">
+
+        <label for="payeeName">Enter Payee Name:</label>
+        <input type="text" id="payeeName" placeholder="Payee Name">
+
+        <label for="amount">Enter Amount:</label>
+        <input type="number" id="amount" placeholder="Amount">
+
+        <!-- Pay Now Button -->
+        <button onclick="payWithUPI()">Pay Now via UPI</button>
+    </div>
+    
     <a th:href="@{/trip/{tripId}/expenses(tripId=${trip.id})}">Back to Expenses</a>
+
+    <script>
+        function payWithUPI() {
+            const upiId = document.getElementById('upiId').value;
+            const payeeName = document.getElementById('payeeName').value;
+            const amount = document.getElementById('amount').value;
+
+            if (!upiId || !payeeName || !amount) {
+                alert("Please fill in all the fields.");
+                return;
+            }
+
+            fetch(`/trip/${'[[${trip.id}]]'}/generateUpiLink?upiId=${upiId}&payeeName=${payeeName}&amount=${amount}`)
+                .then(response => response.text())
+                .then(upiLink => {
+                    window.location.href = upiLink;
+                })
+                .catch(error => console.error('Error generating UPI link:', error));
+        }
+    </script>
 </body>
 </html>
